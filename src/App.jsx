@@ -11,7 +11,10 @@ function App() {
   return (
     <>
         <div className='container'>
-            <h1 id='heading'>To Do App</h1>
+          <div>
+              <h1 id='heading'>To Do App..</h1>
+          </div>
+            
 
             <div className='child1'>
               <input type='text' id='inp-box'/>
