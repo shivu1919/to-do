@@ -14,9 +14,13 @@ function App() {
   }
 
   const completeTheTask = (place) =>{
-    setCompleted([...completed,task.splice(place,1)])
-    task.splice(place,1)
-    setTask([...task])
+
+    setTimeout(()=>{
+      setCompleted([...completed,task.splice(place,1)])
+      task.splice(place,1)
+      setTask([...task])
+    },500)
+
 }
 
 
