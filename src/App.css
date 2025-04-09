@@ -94,4 +94,20 @@
   font-size: 20px;
   color:white;
   border-radius: 15px;
+  cursor: pointer;
+}
+
+
+li{
+  list-style: none;
+  font-size: 20px;
+  color: white;
+  
+}
+
+.rendered-tasks{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  column-gap: 15px;
 }

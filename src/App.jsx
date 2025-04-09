@@ -6,6 +6,18 @@ function App() {
 
   const[task, setTask] = useState(["Learn React"])
   const[completed, setCompleted] = useState(["Learn React"])
+  const[text, setText] = useState()
+
+  const deleteTask = (place) =>{
+      task.splice(place,1)
+      setTask([...task])
+  }
+
+  const completeTheTask = (place) =>{
+    setCompleted([...completed,task.splice(place,1)])
+    task.splice(place,1)
+    setTask([...task])
+}
 
 
   return (
@@ -17,15 +29,33 @@ function App() {
             
 
             <div className='child1'>
-              <input type='text' id='inp-box'/>
-              <button id='btn'>Add Task</button>
+              <input 
+              type='text' 
+              id='inp-box'
+              value={text}
+              onChange={(event)=>{setText(event.target.value)}}
+              />
+
+              <button id='btn' onClick={()=>{setTask([...task,text])
+                setText('')
+              }}>Add Task</button>
             </div>
 
             <div className='child2'>
               <div className='ongoing'>
                   <h1>Ongoing Task</h1>
 
-                  {task.map((item)=><li>{item}</li>)}
+                  {task.map((item,index)=><div className='rendered-tasks'>
+
+                    <input type='checkbox'
+                    id={index}
+                    onChange={()=>{completeTheTask(index)}}
+                    />
+
+                    <li>{item}</li>
+                    <img id={index} src="./delete.png" width="50" onClick={()=>{deleteTask(index)}}/>
+                    
+                    </div>)}
               </div>
 
               <div className='completed'>
