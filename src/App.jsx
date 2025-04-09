@@ -7,6 +7,7 @@ function App() {
   const[task, setTask] = useState(["Learn React"])
   const[completed, setCompleted] = useState(["Learn React"])
   const[text, setText] = useState()
+  const[cb, setCb] = useState(false)
 
   const deleteTask = (place) =>{
       task.splice(place,1)
@@ -16,8 +17,10 @@ function App() {
   const completeTheTask = (place) =>{
 
     setTimeout(()=>{
-      setCompleted([...completed,task.splice(place,1)])
-      task.splice(place,1)
+      let t = task.splice(place,1)
+      setCompleted([...completed,t])
+      setCb(false)
+      console.log(task)
       setTask([...task])
     },500)
 
@@ -53,6 +56,7 @@ function App() {
 
                     <input type='checkbox'
                     id={index}
+                    checked={cb}
                     onChange={()=>{completeTheTask(index)}}
                     />
 
