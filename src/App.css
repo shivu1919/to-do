@@ -37,6 +37,10 @@
   flex-wrap: wrap-reverse;
 }
 
+img{
+  cursor: pointer;
+}
+
 
 #heading{
     font-size: 60px;

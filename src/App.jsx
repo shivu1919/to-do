@@ -4,8 +4,8 @@ import { useState } from 'react'
 
 function App() {
 
-  const[task, setTask] = useState(["Learn React"])
-  const[completed, setCompleted] = useState(["Learn React"])
+  const[task, setTask] = useState([])
+  const[completed, setCompleted] = useState([])
   const[text, setText] = useState()
   const[cb, setCb] = useState(false)
 
@@ -20,7 +20,6 @@ function App() {
       let t = task.splice(place,1)
       setCompleted([...completed,t])
       setCb(false)
-      console.log(task)
       setTask([...task])
     },500)
 
@@ -43,7 +42,15 @@ function App() {
               onChange={(event)=>{setText(event.target.value)}}
               />
 
-              <button id='btn' onClick={()=>{setTask([...task,text])
+              <button id='btn' onClick={()=>{
+                let t = text.trim()
+                if(t==''){
+                  alert("Cant't add empty task")
+                }
+                else{
+                  setTask([...task,t])
+                }
+                
                 setText('')
               }}>Add Task</button>
             </div>
@@ -55,12 +62,18 @@ function App() {
                   {task.map((item,index)=><div className='rendered-tasks'>
 
                     <input type='checkbox'
-                    id={index}
                     checked={cb}
                     onChange={()=>{completeTheTask(index)}}
                     />
 
-                    <li>{item}</li>
+                    <li key={index}>{item}</li>
+                    <img src="/edit.png" 
+                    onClick={()=>{
+                      let upated_value = prompt("Previously: "+task[index])
+                      task.splice(index,1,upated_value)
+                      setTask([...task])
+                    }}
+                    />
                     <img id={index} src="./delete.png" width="50" onClick={()=>{deleteTask(index)}}/>
                     
                     </div>)}
@@ -68,7 +81,7 @@ function App() {
 
               <div className='completed'>
                   <h1>Completed Task</h1>
-                  {completed.map((item)=><li>{item}</li>)}
+                  {completed.map((item, index)=><li key={index}>{item}</li>)}
               </div>
             </div>
         </div>
