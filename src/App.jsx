@@ -1,6 +1,7 @@
 import React from 'react'
 import './App.css'
 import { useState } from 'react'
+import animation from "js-confetti"
 
 function App() {
 
@@ -15,14 +16,30 @@ function App() {
   }
 
   const completeTheTask = (place) =>{
+    const ani = new animation()
+    ani.addConfetti({
+      emojis: ['🌸', '💞', '💫', '💞'],
+   })
 
     setTimeout(()=>{
+      
       let t = task.splice(place,1)
       setCompleted([...completed,t])
       setCb(false)
       setTask([...task])
-    },500)
+      
+    },1000)
 
+}
+
+
+const undoTask = (place)=>{
+  setTimeout(()=>{
+    let t = completed.splice(place,1)
+    setTask([...task,t])
+    setCb(false)
+    setCompleted([...completed])
+  },500)
 }
 
 
@@ -81,7 +98,12 @@ function App() {
 
               <div className='completed'>
                   <h1>Completed Task</h1>
-                  {completed.map((item, index)=><li key={index}>{item}</li>)}
+                  {completed.map((item, index)=>
+                  <div className='undo'> 
+                    <button onClick={()=>{undoTask(index)}}>undo</button>
+                    <li key={index}>{item}</li>
+                   </div> 
+                  )}
               </div>
             </div>
         </div>

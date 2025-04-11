@@ -81,7 +81,17 @@ img{
 
 }
 
-.completed>li{
+.undo{
+  display: flex;
+  column-gap: 10px;
+ 
+}
+
+button{
+  cursor: pointer;
+}
+
+.undo>li{
   text-decoration: line-through;
 }
 
